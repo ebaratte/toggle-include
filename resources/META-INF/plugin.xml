@@ -1,0 +1,41 @@
+<idea-plugin version="2">
+  <id>com.etienne.toggleinclude</id>
+  <name>ToggleInclude</name>
+  <version>0.1.0</version>
+  <vendor url="https://github.com/ebaratte/toggle-include">ebaratte</vendor>
+
+  <description><![CDATA[
+      Quickly toggle between angle brackets and double quotes for C/C++ include directives<br>
+      <pre>
+      #include "my/header.h"   &lt;=&gt;   #include &lt;my/header.h&gt;
+      </pre>
+      Default shortcut: Ctrl + "
+    ]]></description>
+
+  <change-notes><![CDATA[
+      <ul>
+      <li>v0.1.0: Initial version</li>
+      </ul>
+    ]]>
+  </change-notes>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="143"/>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <depends>com.intellij.modules.cidr.lang</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+  </extensions>
+
+  <actions>
+    <!-- Add your actions here -->
+    <action id="toggleinclude.ConvertInclude" class="ConvertInclude" text="Toggle #include style"
+            description="Toggles between &lt; and &quot; for an include line">
+      <keyboard-shortcut keymap="$default" first-keystroke="ctrl QUOTEDBL"/>
+    </action>
+  </actions>
+
+</idea-plugin>
