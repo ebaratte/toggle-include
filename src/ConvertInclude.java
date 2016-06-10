@@ -31,18 +31,15 @@ public class ConvertInclude extends AnAction {
                 String selectedText = selectionModel.getSelectedText();
                 String result = selectedText;
 
-                log.debug("Running convert include action on " + selectedText);
                 Pattern quotes = Pattern.compile("(\\s*#\\s*include\\s*)\"([^\"]*)\"(.*)$", Pattern.DOTALL | Pattern.MULTILINE);
                 Matcher m = quotes.matcher(selectedText);
                 if (m.matches()) {
-                    log.debug("Matches double quotes");
                     result = m.group(1) + "<" + m.group(2) + ">" + m.group(3);
 
                 } else {
                     Pattern angles = Pattern.compile("^(\\s*#\\s*include\\s*)<([^>]*)>(.*)$", Pattern.DOTALL | Pattern.MULTILINE);
                     m = angles.matcher(selectedText);
                     if (m.matches()) {
-                        log.debug("Matches angles");
                         result = m.group(1) + "\"" + m.group(2) + "\"" + m.group(3);
                     }
                 }
