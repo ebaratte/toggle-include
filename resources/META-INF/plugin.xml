@@ -1,20 +1,27 @@
 <idea-plugin version="2">
   <id>com.etienne.toggleinclude</id>
   <name>ToggleInclude</name>
-  <version>0.1.0</version>
-  <vendor url="https://github.com/ebaratte/toggle-include">ebaratte</vendor>
+  <version>0.2.1</version>
+  <vendor url="https://github.com/ebaratte/toggle-include">https://github.com/ebaratte/toggle-include</vendor>
 
   <description><![CDATA[
-      Quickly toggle between angle brackets and double quotes for C/C++ include directives<br>
-      <pre>
-      #include "my/header.h"   &lt;=&gt;   #include &lt;my/header.h&gt;
-      </pre>
-      Default shortcut: Ctrl + "
-    ]]></description>
+      This inspection warns about:
+      <ul>
+       <li>#include &lt;header&gt; directives for project headers</li>
+       <li>#include "header" directives for system / 3rd party libraries headers</li>
+      </ul>
+      It provides quick-fixes to toggle between angle brackets and double quotes.<br><br>
+
+      Note: Directories of the project marked as "Library files" are considered third party,<br><br>
+
+      Additionally, it provides an action (default shortcut: Ctrl + ") to quickly toggle between &lt;&gt; and ""
+       <pre> #include "path/header.h"   &lt;=&gt;   #include &lt;path/header.h&gt;</pre>
+      ]]></description>
 
   <change-notes><![CDATA[
       <ul>
-      <li>v0.1.0: Initial version</li>
+        <li>v0.1.0: Initial version</li>
+        <li>v0.2.1: Inspection + quick fix</li>
       </ul>
     ]]>
   </change-notes>
@@ -27,12 +34,12 @@
   <depends>com.intellij.modules.cidr.lang</depends>
 
   <extensions defaultExtensionNs="com.intellij">
-    <!-- Add your extensions here -->
+    <inspectionToolProvider implementation="com.etienne.toggleinclude.ConvertIncludeInspectionProvider"/>
   </extensions>
 
+
   <actions>
-    <!-- Add your actions here -->
-    <action id="toggleinclude.ConvertInclude" class="ConvertInclude" text="Toggle #include style"
+    <action id="com.etienne.toggleinclude.ConvertInclude" class="com.etienne.toggleinclude.ConvertInclude" text="Toggle #include style"
             description="Toggles between &lt; and &quot; for an include line">
       <keyboard-shortcut keymap="$default" first-keystroke="ctrl QUOTEDBL"/>
     </action>
